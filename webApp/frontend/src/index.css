@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 240 5% 96%;
+
+    --card: 240 6% 6%;
+    --card-foreground: 240 5% 96%;
+
+    --popover: 240 6% 6%;
+    --popover-foreground: 240 5% 96%;
+
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 5% 12%;
+    --secondary-foreground: 240 5% 96%;
+
+    --muted: 240 5% 15%;
+    --muted-foreground: 240 5% 55%;
+
+    --accent: 240 5% 15%;
+    --accent-foreground: 240 5% 96%;
+
+    --destructive: 350 89% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 160 84% 39%;
+    --success-foreground: 0 0% 100%;
+
+    --applied: 199 89% 48%;
+    --applied-foreground: 0 0% 100%;
+
+    --processing: 262 83% 58%;
+    --processing-foreground: 0 0% 100%;
+
+    --border: 240 5% 17%;
+    --input: 240 5% 17%;
+    --ring: 262 83% 58%;
+
+    --radius: 0.5rem;
+
+    /* Custom gradient tokens */
+    --glow-success: 160 84% 39%;
+    --glow-applied: 199 89% 48%;
+    --glow-processing: 262 83% 58%;
+    --glow-error: 350 89% 60%;
+
+    /* Terminal specific */
+    --terminal-bg: 240 10% 5%;
+    --terminal-border: 240 5% 12%;
+    --terminal-text: 160 60% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Custom scrollbar for terminal aesthetic */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+@layer utilities {
+  /* Glow effects */
+  .glow-success {
+    box-shadow: 0 0 20px hsl(var(--glow-success) / 0.3),
+                0 0 40px hsl(var(--glow-success) / 0.1);
+  }
+
+  .glow-applied {
+    box-shadow: 0 0 20px hsl(var(--glow-applied) / 0.3),
+                0 0 40px hsl(var(--glow-applied) / 0.1);
+  }
+
+  .glow-processing {
+    box-shadow: 0 0 20px hsl(var(--glow-processing) / 0.3),
+                0 0 40px hsl(var(--glow-processing) / 0.1);
+  }
+
+  .glow-error {
+    box-shadow: 0 0 20px hsl(var(--glow-error) / 0.3),
+                0 0 40px hsl(var(--glow-error) / 0.1);
+  }
+
+  /* Scanline effect */
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(0 0% 0% / 0.03) 2px,
+      hsl(0 0% 0% / 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Pulsing border animation */
+  @keyframes pulse-border {
+    0%, 100% {
+      border-color: hsl(var(--processing) / 0.5);
+      box-shadow: 0 0 10px hsl(var(--processing) / 0.2);
+    }
+    50% {
+      border-color: hsl(var(--processing));
+      box-shadow: 0 0 25px hsl(var(--processing) / 0.4);
+    }
+  }
+
+  .animate-pulse-border {
+    animation: pulse-border 2s ease-in-out infinite;
+  }
+
+  /* Text glow */
+  .text-glow-success {
+    text-shadow: 0 0 10px hsl(var(--success) / 0.5);
+  }
+
+  .text-glow-processing {
+    text-shadow: 0 0 10px hsl(var(--processing) / 0.5);
+  }
+
+  /* Terminal cursor blink */
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  /* Matrix rain effect for background */
+  @keyframes matrix-fall {
+    0% {
+      transform: translateY(-100%);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--processing)), hsl(var(--success)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
