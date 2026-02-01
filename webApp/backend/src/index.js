@@ -8,6 +8,8 @@ import { fileURLToPath } from 'url'; // Required to recreate __dirname
 import connectDB from '../config/db.js';
 import applicationRoutes from '../routes/applicationRoutes.js';
 import uploadRoutes from '../routes/uploadRoutes.js';
+import resumeRoutes from '../routes/resumeRoutes.js';
+import coverLetterRoutes from '../routes/coverLetterRoutes.js';
 
 dotenv.config();
 
@@ -22,7 +24,10 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 // --- 3. Middleware ---
-app.use(cors({ origin: 'http://localhost:5173' })); // Allow Vite Frontend
+app.use(cors({
+    origin: [/^http:\/\/localhost:\d+$/], // Allow any localhost port
+    credentials: true,
+})); // Allow all localhost origins for dev
 app.use(express.json());
 
 // Serve the 'uploads' folder statically so PDFs can be viewed
@@ -34,6 +39,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Typically, application routes go to /api/applications
 app.use('/api/applications', applicationRoutes); 
 app.use('/api', uploadRoutes); // This handles /api/upload and /api/mission/start
+app.use('/api/resume', resumeRoutes);
+app.use('/api/coverletter', coverLetterRoutes);
 
 // --- 5. Error Handling ---
 app.use((err, req, res, next) => {

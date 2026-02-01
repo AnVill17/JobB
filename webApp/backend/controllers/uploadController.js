@@ -64,13 +64,25 @@ export const startAgentMission = async (req, res) => {
         formData.append('config', JSON.stringify(preferences)); // Ensure it's a string
         formData.append('callbackUrl', 'http://localhost:5000/api/applications');
 
-        const PYTHON_AGENT_URL = process.env.PYTHON_AGENT_URL || 'http://localhost:8000/start-workflow';
+        // --- AGENT INTEGRATION POINT ---
+        // If you have a LangGraph endpoint or an external agent, set LANGGRAPH_URL in your env
+        // Example: LANGGRAPH_URL="http://localhost:8000/start-workflow"
+        const LANGGRAPH_URL = process.env.LANGGRAPH_URL || process.env.PYTHON_AGENT_URL || null;
 
-        /* UNCOMMENT TO CONNECT
-        await axios.post(PYTHON_AGENT_URL, formData, {
-            headers: { ...formData.getHeaders() },
-        });
-        */
+        if (LANGGRAPH_URL) {
+            try {
+                await axios.post(LANGGRAPH_URL, formData, {
+                    headers: { ...formData.getHeaders() },
+                });
+                console.log(`[Backend] ✅ Agent triggered at ${LANGGRAPH_URL}`);
+            } catch (err) {
+                console.error(`[Backend] ❌ Agent call failed: ${err.message}`);
+                // NOTE: We do not fail the request here; the mission was accepted and file is uploaded.
+            }
+        } else {
+            console.log('[Backend] ⚠️ No LANGGRAPH_URL configured. Set LANGGRAPH_URL to call your agent workflow.');
+            // --- TODO: Attach your LangGraph agent here. Configure LANGGRAPH_URL in your .env and ensure it accepts multipart form-data with fields: resume, userId, config, callbackUrl ---
+        }
 
         res.status(200).json({ 
             message: "Agent mission started successfully", 

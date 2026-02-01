@@ -8,9 +8,11 @@ import {
 
 const router = express.Router();
 
-router.post('/applications', createApplication);
-router.get('/applications', getApplications);
-router.patch('/applications/:id', updateApplicationStatus);
+// NOTE: This router is mounted at /api/applications in server setup.
+// Using root (/) here avoids creating /api/applications/applications accidentally.
+router.post('/', createApplication);
+router.get('/', getApplications);
+router.patch('/:id', updateApplicationStatus);
 //router.delete('/applications/:id', deleteApplication);
 
 export default router;

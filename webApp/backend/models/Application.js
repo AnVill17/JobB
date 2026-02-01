@@ -11,6 +11,8 @@ const applicationSchema = new mongoose.Schema({
     dateApplied: { type: Date, default: Date.now },
     resumeUrl: { type: String, required: true },
     coverLetter: { type: String },
+    skillsMatch: { type: String },
+    matchScore: { type: String },
     jobDescription: { type: String },
 });
 
