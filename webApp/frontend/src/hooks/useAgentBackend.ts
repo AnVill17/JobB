@@ -56,8 +56,8 @@ export const useAgentBackend = () => {
   // 3. Fetch Data
   const fetchApplications = useCallback(async () => {
     try {
-      // ⚠️ MAKE SURE THIS PORT MATCHES YOUR BACKEND (5000 or 6969)
-      const res = await fetch('http://localhost:6969/api/applications');
+      // Updated to use Render backend
+      const res = await fetch('https://jobb-a4is.onrender.com/api/applications');
       if (!res.ok) throw new Error('Failed to fetch');
 
       const rawApps = await res.json();

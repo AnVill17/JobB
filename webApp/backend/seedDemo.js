@@ -11,7 +11,7 @@ async function seedDemo() {
     company: 'OpenAI',
     jobTitle: 'AI Research Engineer',
     status: 'applied',
-    jobMatch: 'I am passionate about AI and have experience in deep learning and NLP.',
+    jobMatch: 'Resume Analysis: Demonstrates strong expertise in AI, deep learning, and NLP. Proven track record in research and deploying scalable models. Excellent problem-solving skills and a passion for innovation.',
     coverLetter: 'I am passionate about AI and have experience in deep learning and NLP.',
     skillsMatch: 'Python, Deep Learning, NLP, Research',
     matchScore: '92%',
