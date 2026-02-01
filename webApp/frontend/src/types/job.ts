@@ -15,6 +15,7 @@ export interface Job {
   resumeHighlights?: string[];
   skillsMatch?: string;
   matchScore?: string;
+  jobMatch?: string; // Resume essay or job match string
 }
 
 export interface LogEntry {

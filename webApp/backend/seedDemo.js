@@ -11,7 +11,7 @@ async function seedDemo() {
     company: 'OpenAI',
     jobTitle: 'AI Research Engineer',
     status: 'applied',
-    resumeUrl: '/uploads/demo-resume.pdf',
+    jobMatch: 'I am passionate about AI and have experience in deep learning and NLP.',
     coverLetter: 'I am passionate about AI and have experience in deep learning and NLP.',
     skillsMatch: 'Python, Deep Learning, NLP, Research',
     matchScore: '92%',

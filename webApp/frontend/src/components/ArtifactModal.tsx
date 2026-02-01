@@ -160,6 +160,19 @@ export const ArtifactModal = ({ job, onClose }: ArtifactModalProps) => {
                 </div>
               </div>
 
+              {/* Resume Essay / Job Match String */}
+              {job.jobMatch && (
+                <div className="rounded-lg border border-border bg-secondary/30 overflow-hidden">
+                  <div className="flex items-center gap-2 px-4 py-2 border-b border-border bg-secondary/50">
+                    <FileText className="w-4 h-4 text-processing" />
+                    <span className="text-sm font-medium text-muted-foreground">Resume Essay</span>
+                  </div>
+                  <div className="p-4 font-mono text-sm whitespace-pre-wrap">
+                    {job.jobMatch}
+                  </div>
+                </div>
+              )}
+
               <div className="flex items-center gap-2 p-3 rounded-lg bg-success/10 border border-success/30">
                 <CheckCircle2 className="w-5 h-5 text-success" />
                 <span className="text-sm text-success">

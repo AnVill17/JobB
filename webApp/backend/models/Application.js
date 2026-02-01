@@ -9,7 +9,7 @@ const applicationSchema = new mongoose.Schema({
         default: 'queued',
     },
     dateApplied: { type: Date, default: Date.now },
-    resumeUrl: { type: String, required: true },
+    jobMatch: { type: String, required: true },
     coverLetter: { type: String },
     skillsMatch: { type: String },
     matchScore: { type: String },
